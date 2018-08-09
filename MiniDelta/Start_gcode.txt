@@ -1,0 +1,16 @@
+;This is a long one. The purpose of this script is to eliminate the tiny blobs and strings at each probing point. If you a G29 command that probes 3 or 4 points then don't bother with this script. The 25mm purge is so when the G29 command moves the effector plate down the cooled string of filament will eject out the side (doesn't always work).
+G90 ; switch to absolute positioning - this line was added in case Cura doesn't include it by default
+M82 ; set extruder to absolute mode - this line was added in case Cura doesn't include it by default (may not be needed)
+G92 E0 ; reset extrusion distance
+G1 E25 F300 ; purge 25mm of filament to prime nozzle.
+G92 E0 ; reset extrusion distance
+G4 S5 ; Pause for 5 seconds to allow time for removing extruded filament
+G28 ; start from home position
+G1 E-6 F900 ; retract 6mm of filament before starting the bed leveling process
+G92 E0 ; reset extrusion distance
+G4 S5 ; pause for 5 seconds to allow time for removing extruded filament
+G29 P6 Z0.36 ; 6x6 mesh with offset - YOU MAY NEED TO ADJUST THE Z OFFSET EXAMPLE: change "Z0.36" to Z0.45 or Z0.2
+G1 Z60 ; raise Z 60mm to prepare for priming the nozzle
+G1 E4 F300 ; extrude 4mm of filament to help prime the nozzle just prior to the start of the print
+G92 E0 ; reset extrusion distance
+G4 S5 ; pause for 5 seconds to allow time for cleaniing the nozzle and build plate if needed

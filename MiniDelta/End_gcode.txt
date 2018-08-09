@@ -1,0 +1,12 @@
+M104 S0 ; turn off hotend heater
+M140 S0 ; turn off bed heater
+G91 ; Switch to use Relative Coordinates
+G1 E-3 F700 ; retract the filament a bit before lifting the nozzle to release some of the pressure
+G1 Z2 F1000 ; raise platform 2mm from current position
+G1 E-2 F700 ; retract filament even more
+G90 ; Switch back to using absolute coordinates
+G28 X ; Return to home position. Without an X Y or Z after G28 the print completion time will not be displayed on the Mini Delta's display.
+M84 ; disable motors
+G4 S360 ; pause for 360 seconds to keep fan running to cool hotend and allow the fan to be turned off
+M107 ; turn off fan. Some say M107 doesn't work for them but if the hotend is cool enough it should work
+;M106 S1 ; turn off fan. Remove the semicolon in front of M106 if M107 doesn't work for you
